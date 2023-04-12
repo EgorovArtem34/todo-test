@@ -1,9 +1,13 @@
+import { Provider } from 'react-redux';
 import App from './App';
+import store from './slices/index.js';
 
 const init = () => {
 
   return (
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   );
 };
 
