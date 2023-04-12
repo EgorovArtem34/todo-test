@@ -1,5 +1,6 @@
-import Categories from "./Components/Categories";
-import Tasks from "./Components/Tasks";
+import Categories from "./Categories";
+import Tasks from "./Tasks";
+import Modal from "./Modal";
 
 const TodoPage = () => {
   console.log('e');
@@ -9,6 +10,7 @@ const TodoPage = () => {
       <div className="row h-100 flex-md-row">
         <Categories />
         <Tasks />
+        <Modal />
       </div>
     </div>
   );
