@@ -30,7 +30,6 @@ code {
 
 .bg-blue {
   background-color: #44A0A0;
-  ;
 }
 
 .border-blue {
@@ -41,4 +40,18 @@ code {
   border-radius: 10px;
   color: white;
   background-color: #44A0A0;
+}
+
+.list-group-item {
+  background-color: transparent !important;
+  color: white !important;
+  border-bottom: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color) !important;
+}
+
+svg .second-path {
+  opacity: 0;
+}
+
+svg:hover .second-path {
+  opacity: 1;
 }
