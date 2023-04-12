@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const getLocalStorageTasks = () => localStorage.getItem('tasks');
 
 const updateLocalStorageTasks = (tasks) => {
-  localStorage.setItem('tasks', tasks);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
 const getInitialTasks = () => {
@@ -26,12 +26,30 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, { payload }) => {
-      state.messages.push(payload);
-      updateLocalStorageTasks(state.messages);
+      state.tasks.push(payload);
+      updateLocalStorageTasks(state.tasks);
     },
+    removeFinishedTasks: (state) => {
+      state.tasks = state.tasks.filter((task) => task.status !== 'finished');
+      updateLocalStorageTasks(state.tasks);
+    },
+    updateTask: (state, { payload }) => {
+      const { id, name, category } = payload;
+      state.tasks = state.tasks.map(task =>
+        task.id === id ? { ...task, name, category } : task
+      );
+      updateLocalStorageTasks(state.tasks);
+    },
+    updateTaskStatus: (state, { payload }) => {
+      const { status, id } = payload;
+      state.tasks = state.tasks.map(task =>
+        task.id === id ? { ...task, status } : task
+      );
+      updateLocalStorageTasks(state.tasks);
+    }
   },
 });
 
-export const { addTask } = tasksSlice.actions;
+export const { addTask, removeFinishedTasks, updateTask, updateTaskStatus } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
