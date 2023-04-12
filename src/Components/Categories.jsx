@@ -1,7 +1,6 @@
-
+// import React, { useState } from 'react';
 
 const Categories = () => {
-  console.log('1');
   return (
     <div className="d-none d-sm-flex col-3 col-md-2 col-sm-3 col-xs-1 px-0 bg-categories flex-column h-100 d-flex align-items-center rounded border-blue">
       <div className="d-flex mt-4 mb-2">
