@@ -1,6 +1,6 @@
 import { Navbar, Container } from 'react-bootstrap';
 import './App.css';
-import TodoPage from './TodoPage';
+import TodoPage from './Components/TodoPage';
 
 function App() {
   return (
