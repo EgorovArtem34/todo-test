@@ -21,10 +21,10 @@ const TaskList = () => {
     dispatch(showModal({ type: 'finishedTask', id }));
   };
   return (
-    <ul className="mb-3 px-3 h-100">
+    <ul className="mb-3 px-3">
       {tasks.map((task) => {
         const pathClass = cn({
-          'second-path': task.status !== 'active',
+          'second-path': task.status === 'active',
         });
 
         return (
@@ -36,7 +36,7 @@ const TaskList = () => {
               </svg>
               <span className="fw-bold ps-2">{task.name}</span>
             </div>
-            <span className="ps-4">{task.category}</span>
+            <span className="ps-4">{task.description}</span>
           </li>
         )
       })}
@@ -67,7 +67,7 @@ const Task = () => {
           <button variant="link" className="text-decoration-none text-blue border-0 bg-transparent" onClick={() => dispatch(removeFinishedTasks())}>Очистить завершенные</button>
         </div>
         <div className="d-flex flex-column bg-categories mt-2 vh-100 border-blue overflow-auto">
-          <div className="p-2 overflow-auto">
+          <div className="p-2 overflow-auto mt-2">
             <TaskContext.Provider value={{ tasks: filteredTasks }}>
               <TaskList />
             </TaskContext.Provider>
