@@ -34,9 +34,9 @@ const tasksSlice = createSlice({
       updateLocalStorageTasks(state.tasks);
     },
     updateTask: (state, { payload }) => {
-      const { id, name, category } = payload;
+      const { id, name, description } = payload;
       state.tasks = state.tasks.map(task =>
-        task.id === id ? { ...task, name, category } : task
+        task.id === id ? { ...task, name, description } : task
       );
       updateLocalStorageTasks(state.tasks);
     },
