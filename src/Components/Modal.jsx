@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getModal } from './ModalComponent/index.js';
+import { getModal } from './ModalComponents/index.js';
 
 const Modal = () => {
   const { type } = useSelector((state) => state.modalsSlice);
