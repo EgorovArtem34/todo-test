@@ -21,7 +21,7 @@ const AddTask = () => {
       .min(3, 'не менее 3 и не более 20 символов')
       .max(20, 'не менее 3 и не более 20 символов')
       .required('обязательное поле'),
-    category: yup.string()
+    description: yup.string()
       .trim()
       .min(2, 'не менее 2 и не более 20 символов')
       .max(20, 'не менее 2 и не более 20 символов'),
@@ -29,17 +29,17 @@ const AddTask = () => {
   const formik = useFormik({
     initialValues: {
       name: '',
-      category: '',
+      description: '',
     },
     validationSchema: signUpSchema,
     onSubmit: () => {
-      const { name, category } = formik.values;
+      const { name, description } = formik.values;
       const id = uuidv4();
-      dispatch(addTask({ id, name, category, status: 'working' }));
+      dispatch(addTask({ id, name, description, status: 'active' }));
       setCloseModal();
     }
   })
-  const categories = ['раз', 'два', 'три'];
+  const descriptions = ['раз', 'два', 'три'];
   return (
     <Modal show centered onHide={setCloseModal}>
       <Modal.Header closeButton>
@@ -67,19 +67,19 @@ const AddTask = () => {
               {formik.errors.name}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group controlId="category">
-            <Form.Label>Категория задачи</Form.Label>
+          <Form.Group controlId="description">
+            <Form.Label>Описание задачи</Form.Label>
             <Spearhead
-              id="category"
-              name="category"
+              id="description"
+              name="description"
               multiple={false}
-              labelKey="category"
-              options={categories}
-              placeholder="Введите категорию"
-              emptyLabel="Нет похожих категорий"
+              labelKey="description"
+              options={descriptions}
+              placeholder="Добавьте описание"
+              emptyLabel="Нет совпадений"
               onChange={(selected) => {
                 const value = selected.length > 0 ? selected[0].user : "";
-                formik.setFieldValue('category', value);
+                formik.setFieldValue('description', value);
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -88,16 +88,16 @@ const AddTask = () => {
                 }
               }}
               onInputChange={(text) => {
-                formik.setFieldValue("category", text);
-                formik.setFieldTouched("category", true);
+                formik.setFieldValue("description", text);
+                formik.setFieldTouched("description", true);
               }}
               onBlur={() => {
-                formik.setFieldTouched("category", true);
+                formik.setFieldTouched("description", true);
               }}
-              isInvalid={!!formik.touched.category && !!formik.errors.category}
+              isInvalid={!!formik.touched.description && !!formik.errors.description}
             />
             <Form.Control.Feedback type="invalid">
-              {formik.errors.category}
+              {formik.errors.description}
             </Form.Control.Feedback>
           </Form.Group>
           <Modal.Footer>

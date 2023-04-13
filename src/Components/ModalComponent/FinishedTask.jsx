@@ -10,11 +10,11 @@ const FinishedTask = () => {
   const currentTaskId = useSelector(({ modalsSlice }) => modalsSlice.id);
   const [currentTask] = tasks.filter((task) => task.id === currentTaskId);
   const setCloseModal = () => dispatch(closeModal());
-  const isWorkingStatus = (task) => task.status === 'working';
-  const modalText = isWorkingStatus(currentTask) ? 'Отменить задачу выполненной?' : 'Снять отметки о выполнении задачи';
-  const newStatus = isWorkingStatus(currentTask) ? 'finished' : 'working';
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const isWorkingStatus = (task) => task.status === 'active';
+  const modalText = isWorkingStatus(currentTask) ? 'Отменить задачу выполненной?' : 'Снять отметку о выполнении задачи';
+  const newStatus = isWorkingStatus(currentTask) ? 'finished' : 'active';
+  const handleSubmit = () => {
+    // e.preventDefault();
     dispatch(updateTaskStatus({ status: newStatus, id: currentTaskId }));
     setCloseModal();
   };
