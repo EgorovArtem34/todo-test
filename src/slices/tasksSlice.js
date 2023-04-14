@@ -46,7 +46,7 @@ const tasksSlice = createSlice({
         task.id === id ? { ...task, status } : task
       );
       updateLocalStorageTasks(state.tasks);
-    }
+    },
   },
 });
 
