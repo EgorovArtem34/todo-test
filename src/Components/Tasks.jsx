@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import { showModal } from '../slices/modalsSlice';
@@ -6,6 +5,7 @@ import { removeFinishedTasks } from '../slices/tasksSlice';
 import { useState } from 'react';
 import { TaskContext } from '../contexts';
 import { useTask } from '../hooks';
+import getFilteredTasks from '../utils/getFilteredTasks';
 
 const TaskList = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const Task = () => {
   const dispatch = useDispatch();
   const [currentStatusTasks, setCurrentStatusTasks] = useState('all');
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
-  const filteredTasks = currentStatusTasks === 'all' ? tasks : tasks.filter((task) => task.status === currentStatusTasks);
+  const filteredTasks = currentStatusTasks === 'all' ? tasks : getFilteredTasks(tasks, currentStatusTasks);
   const countFilteredTasks = filteredTasks.length;
 
   const handleClick = () => {
@@ -60,7 +60,7 @@ const Task = () => {
       <div className="d-flex flex-column h-100">
         <div className="d-flex justify-content-between text-blue bg-categories p-2 
       rounded border-blue align-items-center">
-          <span className="d-none d-sm-block">{countFilteredTasks} задач</span>
+          <span className="d-none d-md-block">{countFilteredTasks} задач</span>
           <button className="btn-add px-3 py-1" type="submit" onClick={handleClick}>
             Добавить новую задачу
           </button>
