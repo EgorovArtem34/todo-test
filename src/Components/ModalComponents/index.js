@@ -7,4 +7,4 @@ const modals = {
   updateTask: UpdateTask,
   finishedTask: FinishedTask,
 };
-export const getModal = (type) => modals[type];
+export default (type) => modals[type];

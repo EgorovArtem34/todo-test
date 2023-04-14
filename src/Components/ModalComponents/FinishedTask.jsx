@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { closeModal } from '../../slices/modalsSlice';
 import { updateTaskStatus } from '../../slices/tasksSlice';
 

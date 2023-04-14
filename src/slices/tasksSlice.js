@@ -35,21 +35,20 @@ const tasksSlice = createSlice({
     },
     updateTask: (state, { payload }) => {
       const { id, name, description } = payload;
-      state.tasks = state.tasks.map(task =>
-        task.id === id ? { ...task, name, description } : task
-      );
+      state.tasks = state.tasks.map((task) => (task.id === id ? { ...task, name, description }
+        : task));
       updateLocalStorageTasks(state.tasks);
     },
     updateTaskStatus: (state, { payload }) => {
       const { status, id } = payload;
-      state.tasks = state.tasks.map(task =>
-        task.id === id ? { ...task, status } : task
-      );
+      state.tasks = state.tasks.map((task) => (task.id === id ? { ...task, status } : task));
       updateLocalStorageTasks(state.tasks);
     },
   },
 });
 
-export const { addTask, removeFinishedTasks, updateTask, updateTaskStatus } = tasksSlice.actions;
+export const {
+  addTask, removeFinishedTasks, updateTask, updateTaskStatus,
+} = tasksSlice.actions;
 
 export default tasksSlice.reducer;

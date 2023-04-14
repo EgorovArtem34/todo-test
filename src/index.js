@@ -7,6 +7,4 @@ const app = () => {
   const root = ReactDOM.createRoot(vdom);
   root.render(init());
 };
-
 app();
-

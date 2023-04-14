@@ -4,9 +4,9 @@ import * as yup from 'yup';
 import { Typeahead as Spearhead } from 'react-bootstrap-typeahead';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
+import { v4 as uuidv4 } from 'uuid';
 import { closeModal } from '../../slices/modalsSlice';
 import { addTask } from '../../slices/tasksSlice';
-import { v4 as uuidv4 } from 'uuid';
 
 const AddTask = () => {
   const dispatch = useDispatch();
@@ -37,9 +37,11 @@ const AddTask = () => {
     onSubmit: () => {
       const { name, description } = formik.values;
       const id = uuidv4();
-      dispatch(addTask({ id, name, description, status: 'active' }));
+      dispatch(addTask({
+        id, name, description, status: 'active',
+      }));
       setCloseModal();
-    }
+    },
   });
   return (
     <Modal show centered onHide={setCloseModal}>
@@ -79,7 +81,7 @@ const AddTask = () => {
               placeholder="Добавьте описание"
               emptyLabel="Нет совпадений"
               onChange={(selected) => {
-                const value = selected.length > 0 ? selected[0].user : "";
+                const value = selected.length > 0 ? selected[0].user : '';
                 formik.setFieldValue('description', value);
               }}
               onKeyDown={(e) => {
@@ -89,11 +91,11 @@ const AddTask = () => {
                 }
               }}
               onInputChange={(text) => {
-                formik.setFieldValue("description", text);
-                formik.setFieldTouched("description", true);
+                formik.setFieldValue('description', text);
+                formik.setFieldTouched('description', true);
               }}
               onBlur={() => {
-                formik.setFieldTouched("description", true);
+                formik.setFieldTouched('description', true);
               }}
               isInvalid={!!formik.touched.description && !!formik.errors.description}
             />

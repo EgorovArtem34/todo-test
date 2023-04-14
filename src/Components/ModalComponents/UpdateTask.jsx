@@ -38,8 +38,8 @@ const UpdateTask = () => {
       const { name, description } = formik.values;
       dispatch(updateTask({ id: currentTaskId, name, description }));
       setCloseModal();
-    }
-  })
+    },
+  });
   const descriptions = ['раз', 'два', 'три'];
   return (
     <Modal show centered onHide={setCloseModal}>
@@ -81,12 +81,12 @@ const UpdateTask = () => {
               placeholder="Введите описание"
               emptyLabel="Нет совпадений"
               onChange={(selected) => {
-                const value = selected.length > 0 ? selected[0].user : "";
+                const value = selected.length > 0 ? selected[0].user : '';
                 formik.setFieldValue('description', value);
               }}
               onInputChange={(text) => {
-                formik.setFieldValue("description", text);
-                formik.setFieldTouched("description", true);
+                formik.setFieldValue('description', text);
+                formik.setFieldTouched('description', true);
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -95,7 +95,7 @@ const UpdateTask = () => {
                 }
               }}
               onBlur={() => {
-                formik.setFieldTouched("description", true);
+                formik.setFieldTouched('description', true);
               }}
               isInvalid={!!formik.touched.description && !!formik.errors.description}
             />

@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import getFilteredTasks from "../utils/getFilteredTasks";
+import { useSelector } from 'react-redux';
+import getFilteredTasks from '../utils/getFilteredTasks';
 
 const Categories = () => {
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
@@ -11,12 +11,30 @@ const Categories = () => {
       </div>
       <div className="p-4">
         <ul className="list-unstyled">
-          <li className="pb-2">Все: {tasks.length} шт.</li>
-          <li className="pb-2">Активные: {active.length} шт.</li>
-          <li className="pb-2">Завершенные: {finished.length} шт.</li>
+          <li className="pb-2">
+            Все:
+            {' '}
+            {tasks.length}
+            {' '}
+            шт.
+          </li>
+          <li className="pb-2">
+            Активные:
+            {' '}
+            {active.length}
+            {' '}
+            шт.
+          </li>
+          <li className="pb-2">
+            Завершенные:
+            {' '}
+            {finished.length}
+            {' '}
+            шт.
+          </li>
         </ul>
       </div>
     </div>
-  )
+  );
 };
 export default Categories;
