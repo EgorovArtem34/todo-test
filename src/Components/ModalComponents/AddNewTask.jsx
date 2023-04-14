@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Typeahead as Spearhead } from 'react-bootstrap-typeahead';
 import { Modal, Form, Button } from 'react-bootstrap';
@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 const AddTask = () => {
   const dispatch = useDispatch();
+  const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
+  const descriptions = tasks.map((task) => task.description).filter(Boolean);
   const setCloseModal = () => dispatch(closeModal());
   const inputRef = useRef(null);
   useEffect(() => {
@@ -38,8 +40,7 @@ const AddTask = () => {
       dispatch(addTask({ id, name, description, status: 'active' }));
       setCloseModal();
     }
-  })
-  const descriptions = ['раз', 'два', 'три'];
+  });
   return (
     <Modal show centered onHide={setCloseModal}>
       <Modal.Header closeButton>

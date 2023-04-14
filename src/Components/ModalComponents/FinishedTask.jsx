@@ -14,7 +14,6 @@ const FinishedTask = () => {
   const modalText = isWorkingStatus(currentTask) ? 'Отменить задачу выполненной?' : 'Снять отметку о выполнении задачи';
   const newStatus = isWorkingStatus(currentTask) ? 'finished' : 'active';
   const handleSubmit = () => {
-    // e.preventDefault();
     dispatch(updateTaskStatus({ status: newStatus, id: currentTaskId }));
     setCloseModal();
   };
@@ -24,19 +23,19 @@ const FinishedTask = () => {
       <Modal.Header closeButton>
         <Modal.Title>Смена статуса задачи</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <p className="lead">{modalText}</p>
-          <div className="d-flex justify-content-end">
-            <Button variant="secondary" className="me-2" onClick={setCloseModal}>
-              Отменить
-            </Button>
-            <Button type="submit" variant="primary">
-              Подтвердить
-            </Button>
-          </div>
-        </Form>
+        <p className="lead">{modalText}</p>
       </Modal.Body>
+
+      <Modal.Footer>
+        <Button variant="secondary" className="me-2" onClick={setCloseModal}>
+          Отменить
+        </Button>
+        <Button type="submit" variant="primary" onClick={handleSubmit}>
+          Подтвердить
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };
