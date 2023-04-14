@@ -1,17 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { closeModal } from '../../slices/modalsSlice';
 import { updateTaskStatus } from '../../slices/tasksSlice';
 
 const FinishedTask = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
   const currentTaskId = useSelector(({ modalsSlice }) => modalsSlice.id);
   const [currentTask] = tasks.filter((task) => task.id === currentTaskId);
   const setCloseModal = () => dispatch(closeModal());
   const isWorkingStatus = (task) => task.status === 'active';
-  const modalText = isWorkingStatus(currentTask) ? 'Отменить задачу выполненной?' : 'Снять отметку о выполнении задачи';
+  const modalText = isWorkingStatus(currentTask) ? t('finishedTask.isFinished') : t('finishedTask.removeFinished');
   const newStatus = isWorkingStatus(currentTask) ? 'finished' : 'active';
   const handleSubmit = () => {
     dispatch(updateTaskStatus({ status: newStatus, id: currentTaskId }));
@@ -21,7 +23,7 @@ const FinishedTask = () => {
   return (
     <Modal show centered onHide={setCloseModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Смена статуса задачи</Modal.Title>
+        <Modal.Title>{t('finishedTask.changeStatus')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -30,10 +32,10 @@ const FinishedTask = () => {
 
       <Modal.Footer>
         <Button variant="secondary" className="me-2" onClick={setCloseModal}>
-          Отменить
+          {t('btn.cancel')}
         </Button>
         <Button type="submit" variant="primary" onClick={handleSubmit}>
-          Подтвердить
+          {t('btn.confirm')}
         </Button>
       </Modal.Footer>
     </Modal>

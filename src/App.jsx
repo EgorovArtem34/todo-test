@@ -1,18 +1,36 @@
-import { Navbar, Container } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import {
+  Navbar, Container, DropdownButton, Dropdown,
+} from 'react-bootstrap';
+import { BsGlobe } from 'react-icons/bs';
 import './App.css';
 import TodoPage from './Components/TodoPage';
 
-const App = () => (
-  <div className="vh-100 bg-dark">
-    <div className="d-flex flex-column h-100">
-      <Navbar expand="lg">
-        <Container className="justify-content-center">
-          <h1 className="header">Персональный менеджер задач</h1>
-        </Container>
-      </Navbar>
-      <TodoPage />
+const App = () => {
+  const { i18n, t } = useTranslation();
+
+  const handleLngChange = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  return (
+    <div className="vh-100 bg-dark">
+      <div className="d-flex flex-column h-100">
+        <div className="d-flex justify-content-end mt-2 mx-2">
+          <DropdownButton title={<BsGlobe />} variant="success">
+            <Dropdown.Item onClick={() => handleLngChange('ru')}>RU</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleLngChange('en')}>EN</Dropdown.Item>
+          </DropdownButton>
+        </div>
+        <Navbar expand="lg">
+          <Container className="justify-content-center">
+            <h1 className="header">{t('header')}</h1>
+          </Container>
+        </Navbar>
+        <TodoPage />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default App;

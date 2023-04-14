@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Typeahead as Spearhead } from 'react-bootstrap-typeahead';
@@ -8,6 +9,7 @@ import { closeModal } from '../../slices/modalsSlice';
 import { updateTask } from '../../slices/tasksSlice';
 
 const UpdateTask = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
   const currentTaskId = useSelector(({ modalsSlice }) => modalsSlice.id);
@@ -20,13 +22,13 @@ const UpdateTask = () => {
   const signUpSchema = yup.object().shape({
     name: yup.string()
       .trim()
-      .min(3, 'не менее 3 и не более 20 символов')
-      .max(20, 'не менее 3 и не более 20 символов')
-      .required('обязательное поле'),
+      .min(3, t('errors.minMax'))
+      .max(20, t('errors.minMax'))
+      .required(t('errors.required')),
     description: yup.string()
       .trim()
-      .min(2, 'не менее 2 и не более 20 символов')
-      .max(20, 'не менее 2 и не более 20 символов'),
+      .min(3, t('errors.minMax'))
+      .max(20, t('errors.minMax')),
   });
   const formik = useFormik({
     initialValues: {
@@ -44,17 +46,17 @@ const UpdateTask = () => {
   return (
     <Modal show centered onHide={setCloseModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Обновить задачу</Modal.Title>
+        <Modal.Title>{t('updateTask.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label htmlFor="name">Имя задачи</Form.Label>
+            <Form.Label htmlFor="name">{t('updateTask.name')}</Form.Label>
             <Form.Control
               required
               ref={inputRef}
               onChange={formik.handleChange}
-              placeholder="Введите имя задачи"
+              placeholder={t('updateTask.placeholderName')}
               onBlur={formik.handleBlur}
               type="text"
               value={formik.values.name}
@@ -69,7 +71,7 @@ const UpdateTask = () => {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="description">
-            <Form.Label>Описание задачи</Form.Label>
+            <Form.Label>{t('updateTask.description')}</Form.Label>
             <Spearhead
               id="description"
               name="description"
@@ -78,8 +80,8 @@ const UpdateTask = () => {
               options={descriptions}
               type="text"
               defaultSelected={[formik.values.description]}
-              placeholder="Введите описание"
-              emptyLabel="Нет совпадений"
+              placeholder={t('updateTask.placeholderDesc')}
+              emptyLabel={t('emptyLabel')}
               onChange={(selected) => {
                 const value = selected.length > 0 ? selected[0].user : '';
                 formik.setFieldValue('description', value);
@@ -105,10 +107,10 @@ const UpdateTask = () => {
           </Form.Group>
           <Modal.Footer>
             <Button variant="secondary" className="me-2" onClick={setCloseModal}>
-              Отменить
+              {t('btn.cancel')}
             </Button>
             <Button variant="primary" type="submit" className="me-2">
-              Подтвердить
+              {t('btn.confirm')}
             </Button>
           </Modal.Footer>
         </Form>

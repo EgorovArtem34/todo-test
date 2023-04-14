@@ -5,10 +5,12 @@ import { Typeahead as Spearhead } from 'react-bootstrap-typeahead';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
 import { closeModal } from '../../slices/modalsSlice';
 import { addTask } from '../../slices/tasksSlice';
 
 const AddTask = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
   const descriptions = tasks.map((task) => task.description).filter(Boolean);
@@ -20,13 +22,13 @@ const AddTask = () => {
   const signUpSchema = yup.object().shape({
     name: yup.string()
       .trim()
-      .min(3, 'не менее 3 и не более 20 символов')
-      .max(20, 'не менее 3 и не более 20 символов')
-      .required('обязательное поле'),
+      .min(3, t('errors.minMax'))
+      .max(20, t('errors.minMax'))
+      .required(t('errors.required')),
     description: yup.string()
       .trim()
-      .min(2, 'не менее 2 и не более 20 символов')
-      .max(20, 'не менее 2 и не более 20 символов'),
+      .min(3, t('errors.minMax'))
+      .max(20, t('errors.minMax')),
   });
   const formik = useFormik({
     initialValues: {
@@ -46,17 +48,17 @@ const AddTask = () => {
   return (
     <Modal show centered onHide={setCloseModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Создать задачу</Modal.Title>
+        <Modal.Title>{t('addNewTask.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label htmlFor="name">Имя задачи</Form.Label>
+            <Form.Label htmlFor="name">{t('addNewTask.name')}</Form.Label>
             <Form.Control
               required
               ref={inputRef}
               onChange={formik.handleChange}
-              placeholder="Введите имя задачи"
+              placeholder={t('addNewTask.placeholderName')}
               onBlur={formik.handleBlur}
               type="text"
               value={formik.values.name}
@@ -71,15 +73,15 @@ const AddTask = () => {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="description">
-            <Form.Label>Описание задачи</Form.Label>
+            <Form.Label>{t('addNewTask.description')}</Form.Label>
             <Spearhead
               id="description"
               name="description"
               multiple={false}
               labelKey="description"
               options={descriptions}
-              placeholder="Добавьте описание"
-              emptyLabel="Нет совпадений"
+              placeholder={t('addNewTask.placeholderDesc')}
+              emptyLabel={t('emptyLabel')}
               onChange={(selected) => {
                 const value = selected.length > 0 ? selected[0].user : '';
                 formik.setFieldValue('description', value);
@@ -105,10 +107,10 @@ const AddTask = () => {
           </Form.Group>
           <Modal.Footer>
             <Button variant="secondary" className="me-2" onClick={setCloseModal}>
-              Отменить
+              {t('btn.cancel')}
             </Button>
             <Button variant="primary" type="submit" className="me-2">
-              Подтвердить
+              {t('btn.confirm')}
             </Button>
           </Modal.Footer>
         </Form>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo, useState } from 'react';
 import cn from 'classnames';
@@ -53,12 +54,12 @@ const TaskList = () => {
 };
 
 const Task = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [currentStatusTasks, setCurrentStatusTasks] = useState('all');
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
   const filteredTasks = currentStatusTasks === 'all' ? tasks : getFilteredTasks(tasks, currentStatusTasks);
   const providerTasks = useMemo(() => ({ tasks: filteredTasks }), [filteredTasks]);
-  const countFilteredTasks = filteredTasks.length;
 
   const handleClick = () => {
     dispatch(showModal({ type: 'addNewTask', id: null }));
@@ -71,14 +72,14 @@ const Task = () => {
       rounded border-blue align-items-center"
         >
           <span className="d-none d-md-block">
-            {countFilteredTasks}
-            {' '}
-            задач
+            {t('countTasks.key', { count: filteredTasks.length })}
           </span>
           <button className="btn-add px-3 py-1" type="submit" onClick={handleClick}>
-            Добавить новую задачу
+            {t('btn.addNewTask')}
           </button>
-          <button type="button" className="text-decoration-none text-blue border-0 bg-transparent" onClick={() => dispatch(removeFinishedTasks())}>Очистить завершенные</button>
+          <button type="button" className="text-decoration-none text-blue border-0 bg-transparent" onClick={() => dispatch(removeFinishedTasks())}>
+            {t('btn.clearFinished')}
+          </button>
         </div>
         <div className="d-flex flex-column bg-categories mt-2 vh-100 border-blue overflow-auto">
           <div className="p-2 overflow-auto mt-2">
@@ -87,9 +88,27 @@ const Task = () => {
             </TaskContext.Provider>
           </div>
           <div className="mt-auto d-flex justify-content-center py-3">
-            <button type="button" className="text-decoration-none text-blue border-0 bg-transparent" onClick={() => setCurrentStatusTasks('active')}>Активные</button>
-            <button type="button" className="text-decoration-none text-blue border-0 bg-transparent" onClick={() => setCurrentStatusTasks('all')}>Все</button>
-            <button type="button" className="text-decoration-none text-blue border-0 bg-transparent" onClick={() => setCurrentStatusTasks('finished')}>Завершенные</button>
+            <button
+              type="button"
+              className="text-decoration-none text-blue border-0 bg-transparent"
+              onClick={() => setCurrentStatusTasks('active')}
+            >
+              {t('statistics.active')}
+            </button>
+            <button
+              type="button"
+              className="text-decoration-none text-blue border-0 bg-transparent"
+              onClick={() => setCurrentStatusTasks('all')}
+            >
+              {t('statistics.all')}
+            </button>
+            <button
+              type="button"
+              className="text-decoration-none text-blue border-0 bg-transparent"
+              onClick={() => setCurrentStatusTasks('finished')}
+            >
+              {t('statistics.finished')}
+            </button>
           </div>
         </div>
       </div>
