@@ -90,21 +90,32 @@ const Task = () => {
           <div className="mt-auto d-flex justify-content-center py-3">
             <button
               type="button"
-              className="text-decoration-none text-blue border-0 bg-transparent"
+              className={cn(
+                'text-decoration-none border-0 text-blue bg-transparent',
+                {
+                  activeBtn: currentStatusTasks === 'active',
+                },
+              )}
               onClick={() => setCurrentStatusTasks('active')}
             >
               {t('statistics.active')}
             </button>
             <button
               type="button"
-              className="text-decoration-none text-blue border-0 bg-transparent"
+              className={cn(
+                'text-decoration-none text-blue border-0 bg-transparent',
+                { activeBtn: currentStatusTasks === 'all' },
+              )}
               onClick={() => setCurrentStatusTasks('all')}
             >
               {t('statistics.all')}
             </button>
             <button
               type="button"
-              className="text-decoration-none text-blue border-0 bg-transparent"
+              className={cn(
+                'text-decoration-none text-blue border-0 bg-transparent',
+                { activeBtn: currentStatusTasks === 'finished' },
+              )}
               onClick={() => setCurrentStatusTasks('finished')}
             >
               {t('statistics.finished')}

@@ -42,6 +42,10 @@ code {
   background-color: #44A0A0;
 }
 
+.activeBtn {
+  color: white;
+}
+
 .list-group-item {
   background-color: transparent !important;
   color: white !important;
