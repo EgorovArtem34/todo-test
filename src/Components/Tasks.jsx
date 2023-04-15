@@ -68,7 +68,7 @@ const Task = () => {
   return (
     <div className="col-12 col-md-10 col-sm-9 col-xs-12 h-100">
       <div className="d-flex flex-column h-100">
-        <div className="d-flex justify-content-between text-blue bg-categories p-2
+        <div className="d-flex justify-content-between text-blue bg-statistics p-2
       rounded border-blue align-items-center"
         >
           <span className="d-none d-md-block">
@@ -81,7 +81,7 @@ const Task = () => {
             {t('btn.clearFinished')}
           </button>
         </div>
-        <div className="d-flex flex-column bg-categories mt-2 vh-100 border-blue overflow-auto">
+        <div className="d-flex flex-column bg-statistics mt-2 vh-100 border-blue overflow-auto">
           <div className="p-2 overflow-auto mt-2">
             <TaskContext.Provider value={providerTasks}>
               <TaskList />

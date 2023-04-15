@@ -2,12 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import getFilteredTasks from '../utils/getFilteredTasks';
 
-const Categories = () => {
+const Statistics = () => {
   const { t } = useTranslation();
   const tasks = useSelector(({ tasksSlice }) => tasksSlice.tasks);
   const { active, finished } = getFilteredTasks(tasks);
   return (
-    <div className="d-none d-sm-flex col-3 col-md-2 col-sm-3 col-xs-1 px-0 bg-categories flex-column h-100 d-flex align-items-center rounded border-blue">
+    <div className="d-none d-sm-flex col-3 col-md-2 col-sm-3 col-xs-1 px-0 bg-statistics flex-column h-100 d-flex align-items-center rounded border-blue">
       <div className="d-flex pt-3 mb-2">
         <div className="px-3">{t('statistics.title')}</div>
       </div>
@@ -36,4 +36,4 @@ const Categories = () => {
     </div>
   );
 };
-export default Categories;
+export default Statistics;
