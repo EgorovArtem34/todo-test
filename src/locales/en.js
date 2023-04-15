@@ -20,6 +20,8 @@ export default {
       title: 'Update task',
       name: 'Task name',
       placeholderName: 'Enter task name',
+      placeholderDesc: 'Add description',
+      description: 'Task description',
     },
     errors: {
       required: 'Required field',

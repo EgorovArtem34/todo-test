@@ -19,7 +19,8 @@ export default {
     updateTask: {
       title: 'Обновить задачу',
       name: 'Имя задачи',
-      placeholderName: 'Введите имя задачи',
+      placeholderDesc: 'Добавьте описание',
+      description: 'Описание задачи',
     },
     errors: {
       required: 'Обязательное поле',
