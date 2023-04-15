@@ -25,6 +25,7 @@ export default {
     errors: {
       required: 'Обязательное поле',
       minMax: 'От 3 до 20 символов',
+      minMax30: 'От 3 до 30 символов',
     },
     btn: {
       cancel: 'Отменить',

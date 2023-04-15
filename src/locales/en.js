@@ -26,6 +26,7 @@ export default {
     errors: {
       required: 'Required field',
       minMax: 'From 3 to 20 characters',
+      minMax30: 'From 3 to 30 characters',
     },
     btn: {
       cancel: 'Cancel',

@@ -27,8 +27,8 @@ const AddTask = () => {
       .required(t('errors.required')),
     description: yup.string()
       .trim()
-      .min(3, t('errors.minMax'))
-      .max(20, t('errors.minMax')),
+      .min(3, t('errors.minMax30'))
+      .max(30, t('errors.minMax30')),
   });
   const formik = useFormik({
     initialValues: {
